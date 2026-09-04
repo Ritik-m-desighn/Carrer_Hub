@@ -49,6 +49,9 @@ router.get("/applications/recruiter/jobs",auth,jobAuth,recruiterjobs
 router.put("/applications/recruiter/appicationUpdate/:id",auth,jobAuth,applicationUpdate
 );
 
+// router.put("/applications/recruiter/appicationUpdate/:id",auth,jobAuth,applicationUpdate
+// );
+
 router.delete("/applications/recruiter/delete/:id",auth,jobAuth,jobDelete
 );
 

@@ -198,39 +198,45 @@ const recruiterjobs = async (req, res, next) => {
 
 
 
-const applicationUpdate=async(req,res,next)=>{
-  try{
-let updated=await applicationModel.find(
-    { _id: req.params.id }
-  )
-  if(updated.length>0){
- const jobId= updated[0].job;
-  const verified=await jobModel.find({_id:jobId});
-  if(verified.length>0){
-    if(verified[0].postBy==req.user){
-      updated=await applicationModel.findOneAndUpdate(
-    { _id: req.params.id },
-    { status: "selected" },
-    { returnDocument: "after" }
-  )
-        return res.status(200).json(" yes this job own by this guy and they can change the value");
-  }
- else{
-    return res.status(403).json("you are not the owner of this job")
-  }
-  }
-  else{
-    return res.status(404).json("no job exist the job must be deleted or something");
-  }
-  }
-  else{
-    return res.status(404).json('no such appllciation exist');
-  }
+const applicationUpdate = async (req, res, next) => {
+  try {
+    const application = await applicationModel.findById(req.params.id);
 
+    if (!application) {
+      return res.status(404).json({
+        message: "Application not found",
+      });
+    }
+
+    const job = await jobModel.findById(application.job);
+
+    if (!job) {
+      return res.status(404).json({
+        message: "The job associated with this application does not exist",
+      });
+    }
+
+    if (job.postBy != req.user) {
+      return res.status(403).json({
+        message: "You are not the owner of this job",
+      });
+    }
+
+    const updatedApplication = await applicationModel.findByIdAndUpdate(
+      req.params.id,
+      { status: req.body.status},
+      { new: true }
+    );
+
+    return res.status(200).json({
+      message: "Application status updated successfully",
+      application: updatedApplication,
+    });
+  } catch (err) {
+    next(err);
   }
-  catch(err){
-next(err);  }
-}
+};
+
 
 const jobDelete=async(req,res,next)=>{
   try{

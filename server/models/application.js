@@ -3,7 +3,7 @@ const application = new mongoose.Schema({
     status:{
         type:String,
         required:true,
-        enum: ["pending", "selected"]
+        enum: ["pending", "selected","rejected"]
     },
     date: {
   type: Date,
