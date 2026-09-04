@@ -1,7 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
 const YourJobs = () => {
-    const navigate=useNavigate();
   const [jobs, setJobs] = useState([]);
   const [applications, setApplications] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -254,7 +252,7 @@ const handleApplications = async (jobId) => {
             <button
               onClick={() => handleDelete(job._id)}
               className="rounded-lg bg-red-600 px-4 py-2 text-white hover:bg-red-700"
-            >
+            > 
               Delete Job
             </button>
 

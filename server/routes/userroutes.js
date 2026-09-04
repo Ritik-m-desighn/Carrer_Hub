@@ -1,5 +1,5 @@
 const express=require("express");
-const {register,login,profile,addJob,application,yourApplications,applicants, applicationUpdate,jobDelete,jobUpdate,getProfile,jobSearch,jobs,applicationDelete}=require("../controllers/usercontroller")
+const {register,login,profile,addJob,application,yourApplications,recruiterjobs, applicationUpdate,jobDelete,jobUpdate,getProfile,jobSearch,jobs,applicationDelete,jobApplications}=require("../controllers/usercontroller")
 const {auth,jobAuth,errorHandle}=require("../middleware/authmiddleware");
 const router=express.Router();
 const multer=require("multer");
@@ -43,7 +43,7 @@ router.post("/apply/:id",auth,application);
 
 router.get("/applications/user",auth,yourApplications);
 
-router.get("/applications/recruiter",auth,jobAuth,applicants
+router.get("/applications/recruiter/jobs",auth,jobAuth,recruiterjobs
 );
 
 router.put("/applications/recruiter/appicationUpdate/:id",auth,jobAuth,applicationUpdate
@@ -62,6 +62,7 @@ router.post("/profile",auth,upload.fields([{name:"profile"},{name:"resume"}]),pr
 
 router.get("/getProfile",auth,getProfile)
 
+router.get("/recruiter/jobApplications/:jobId",auth,jobAuth,jobApplications);
 
 
 module.exports=router;

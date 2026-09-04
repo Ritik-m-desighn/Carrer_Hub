@@ -12,9 +12,11 @@ const Form = () => {
   }, [])
 
   const jobs = async () => {
+      const user = JSON.parse(localStorage.getItem("userImfo") || "{}");
+    const token = user?.token;
     const data = await fetch("http://localhost:5000/jobs", {
       headers: {
-        Authorization: `Bearer ${localStorage.getItem("token")}`,
+        Authorization: `Bearer ${token}`,
       }
     })
     const res = await data.json()
@@ -36,7 +38,12 @@ const Form = () => {
       })
 
       const data = await res.json()
-      console.log(data)
+      if(data=="user registered succesfully"){
+        navigate("/login")
+      }
+      else{
+        console.log("something went wrong")
+      }
     } catch (err) {
       console.log("something went wrong while register", err)
     }

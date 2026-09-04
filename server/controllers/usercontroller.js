@@ -118,7 +118,7 @@ const addJob = async (req, res, next) => {
       city,
       applicationUrl,
       skills,
-      postBy: req.user._id,
+      postBy: req.user,
     });
 
     res.status(201).json({
@@ -178,26 +178,25 @@ next(err);
 }
 }
 
-const applicants=async(req,res,next)=>{
-  try{
-      const applicants=await jobModel.find({
-      postBy:req.user
-     });
-     if(applicants.length>0){
-       const jobIds = applicants.map(job => job._id);
-      const recruiterApplications = await applicationModel.find({
-  job: { $in: jobIds }
-}).populate("appliedBy");
+const recruiterjobs = async (req, res, next) => {
+  try {
+    const jobs = await jobModel.find({
+      postBy: req.user
+    });
 
-return res.status(200).json(recruiterApplications);
-     }
-     else{
-      return res.status(200).json("you didnt created  any jobs");
-     }
-      }
-      catch(err){
-next(err);      }
-}
+    if (jobs.length === 0) {
+      return res.status(404).json({
+        message: "You haven't created any jobs"
+      });
+    }
+
+    return res.status(200).json(jobs);
+  } catch (err) {
+    next(err);
+  }
+};
+
+
 
 const applicationUpdate=async(req,res,next)=>{
   try{
@@ -342,7 +341,6 @@ const getProfile = async (req, res, next) => {
   }
 };
 
-
 const jobs=async(req,res,next)=>{
   try{
 const data=await jobModel.find();
@@ -353,4 +351,23 @@ res.status(200).json(data);
   }
 }
 
-module.exports={register,login,profile,addJob,application,yourApplications,applicants,applicationUpdate,jobDelete,jobUpdate,getProfile,jobSearch,jobs,applicationDelete};
+const jobApplications = async (req, res, next) => {
+  try {
+    const applications = await applicationModel
+      .find({ job: req.params.jobId })
+
+    if (applications.length === 0) {
+      return res.status(404).json({
+        message: "No applications found for this job"
+      });
+    }
+
+    return res.status(200).json(applications);
+
+  } catch (err) {
+    next(err);
+  }
+};
+
+
+module.exports={register,login,profile,addJob,application,yourApplications,recruiterjobs,applicationUpdate,jobDelete,jobUpdate,getProfile,jobSearch,jobs,applicationDelete,jobApplications};

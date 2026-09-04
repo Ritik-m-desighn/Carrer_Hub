@@ -10,6 +10,9 @@ const Profile = () => {
   const addJob =()=>{
     navigate("/addJobs");
   }
+  const Yourjobs =()=>{
+    navigate("/Yourjobs");
+  }
   const getProfile=async()=>{
     const user = JSON.parse(localStorage.getItem("userImfo") || "{}");
     const token = user?.token;
@@ -94,8 +97,12 @@ setResume(null);
         <div className="text-center sm:text-left">
           <h1 className="text-3xl font-bold">{imfo.name || "Developer"}</h1>
           <p className="text-zinc-400 mt-1">📍 {imfo.location}</p>
-          <p  className="px-4 py-2 bg-green-500/10 border border-green-500/30
-                         text-green-400 cursor-pointer rounded-full text-sm" onClick={addJob}>👨‍💻 Add Job</p>
+         <div className="flex gap-3">
+           <p  className="px-4 py-2 bg-green-500/10 border border-green-500/30
+               text-green-400 cursor-pointer rounded-full text-sm" onClick={addJob}>👨‍💻 Add Job</p>
+              <p  className="px-4 py-2 bg-green-500/10 border border-green-500/30
+              text-green-400 cursor-pointer rounded-full text-sm" onClick={Yourjobs}>👜 Your jobs</p>
+         </div>
         </div>
       </div>
 

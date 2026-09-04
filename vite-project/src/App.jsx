@@ -9,6 +9,7 @@ import Filtered from './components/Filtered'
 import Applications from './components/Applications'
 import Profile from './components/Profile'
 import AddJob from './components/AddJob'
+import YourJobs from './components/YourJobs'
 const App = () => {
   const navigate=useNavigate();
   return (
@@ -17,6 +18,7 @@ const App = () => {
         <Route path="/" element={<Navigate to="/register" />} />
         <Route path='/home' element={<Home/>}/>
         <Route path='/addJobs' element={<AddJob/>}/>
+        <Route path='/Yourjobs' element={<YourJobs/>}/>
         <Route path='/profile' element={<Profile/>}/>
         <Route path='/applications' element={<Applications/>}/>
         <Route path='/filtered' element={<Filtered/>}/>
