@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import JobApplications from "./JobApplications";
 const YourJobs = () => {
+  const navigate=useNavigate();
   const [jobs, setJobs] = useState([]);
   const [applications, setApplications] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -48,45 +50,75 @@ fetchJobs();
   }, []);
 
   const handleDelete = async (jobId) => {
-    const confirmDelete = window.confirm(
-      "Are you sure you want to delete this job?"
+  const confirmDelete = window.confirm(
+    "Are you sure you want to delete this job?"
+  );
+
+  if (!confirmDelete) return;
+
+  try {
+    const token = getToken();
+
+    const response = await fetch(
+      `http://localhost:5000/applications/recruiter/delete/${jobId}`,
+      {
+        method: "DELETE",
+        headers: {
+          Authorization: `Bearer ${token}`,
+        }
+      }
     );
 
-    if (!confirmDelete) return;
+    const data = await response.json();
 
-    try {
-      const token = getToken();
-
-      const res = await fetch(
-        `http://localhost:5000/applications/recruiter/jobs/${jobId}`,
-        {
-          method: "DELETE",
-          credentials: "include",
-          headers: {
-            Authorization: `Bearer ${token}`,
-            "Content-Type": "application/json",
-          },
-        }
-      );
-
-      if (!res.ok) {
-        throw new Error("Failed to delete job");
-      }
-
-      // Remove job from UI
-      setJobs((prevJobs) =>
-        prevJobs.filter((job) => job._id !== jobId)
-      );
-
-    } catch (err) {
-      console.error(err);
-      alert("Failed to delete job");
+    if (!response.ok) {
+      throw new Error(data.message || "Failed to delete job");
     }
-  };
 
-  const handleUpdate = (jobId) => {
-    window.location.href = `/recruiter/jobs/update/${jobId}`;
-  };
+    // Remove the deleted job from the UI
+    setJobs((prevJobs) =>
+      prevJobs.filter((job) => job._id !== jobId)
+    );
+
+    alert(data.message || "Job deleted successfully.");
+  } catch (error) {
+    console.error("Delete job error:", error);
+    alert(error.message || "Failed to delete job.");
+  }
+};
+
+
+const handleUpdate = async (jobId) => {
+   navigate(`/applications/recruiter/jobUpdate/${jobId}/`)
+}
+//   try {
+//     const token = getToken();
+
+//     const response = await fetch(
+//       `http://localhost:5000/recruiter/updateJob/${jobId}`,
+//       {
+//         method: "PUT",
+//         headers: {
+//           Authorization: `Bearer ${token}`,
+//         },
+//         body: JSON.stringify({
+//         }),
+//       }
+//     );
+
+//     const data = await response.json();
+
+//     if (!response.ok) {
+//       throw new Error(data.message || "Failed to update job");
+//     }
+
+//     console.log("Job updated successfully:", data);
+
+//   } catch (err) {
+//     console.error("Error updating job:", err);
+//   }
+// };
+
 
 const handleApplications = async (jobId) => {
   try {
@@ -97,7 +129,7 @@ const handleApplications = async (jobId) => {
       },
     });
 
-    const data = await response.json(); // parse JSON
+    const data = await response.json(); 
 
     if (data.length > 0) {
         setApplications(data);

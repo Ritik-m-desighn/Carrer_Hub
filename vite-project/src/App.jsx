@@ -10,6 +10,7 @@ import Applications from './components/Applications'
 import Profile from './components/Profile'
 import AddJob from './components/AddJob'
 import YourJobs from './components/YourJobs'
+import EditJob from './components/JobEditform'
 const App = () => {
   const navigate=useNavigate();
   return (
@@ -19,6 +20,7 @@ const App = () => {
         <Route path='/home' element={<Home/>}/>
         <Route path='/addJobs' element={<AddJob/>}/>
         <Route path='/Yourjobs' element={<YourJobs/>}/>
+        <Route path='/applications/recruiter/jobUpdate/:id' element={<EditJob/>}/>
         <Route path='/profile' element={<Profile/>}/>
         <Route path='/applications' element={<Applications/>}/>
         <Route path='/filtered' element={<Filtered/>}/>
