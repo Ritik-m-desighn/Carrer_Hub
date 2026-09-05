@@ -91,33 +91,6 @@ fetchJobs();
 const handleUpdate = async (jobId) => {
    navigate(`/applications/recruiter/jobUpdate/${jobId}/`)
 }
-//   try {
-//     const token = getToken();
-
-//     const response = await fetch(
-//       `http://localhost:5000/recruiter/updateJob/${jobId}`,
-//       {
-//         method: "PUT",
-//         headers: {
-//           Authorization: `Bearer ${token}`,
-//         },
-//         body: JSON.stringify({
-//         }),
-//       }
-//     );
-
-//     const data = await response.json();
-
-//     if (!response.ok) {
-//       throw new Error(data.message || "Failed to update job");
-//     }
-
-//     console.log("Job updated successfully:", data);
-
-//   } catch (err) {
-//     console.error("Error updating job:", err);
-//   }
-// };
 
 
 const handleApplications = async (jobId) => {

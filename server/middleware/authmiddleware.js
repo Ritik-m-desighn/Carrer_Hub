@@ -1,6 +1,8 @@
 const jwt=require("jsonwebtoken");
 const userModel=require("../models/user"); 
-const secret="qwerty";
+require("dotenv").config();
+
+const secret=process.env.JWT_SECRET;
 const auth=async(req,res,next)=>{
   try{
  const user=jwt.verify(req.headers.authorization.split(" ")[1],secret);

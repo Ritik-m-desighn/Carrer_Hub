@@ -83,151 +83,186 @@ setResume(null);
   }
 };
 
-  return (
-    imfo ? (
-  <div className="min-h-screen bg-zinc-950 text-white flex items-center justify-center px-4 py-10">
-    <div className="w-full max-w-3xl bg-zinc-900 border border-zinc-800 rounded-3xl p-8 shadow-2xl">
-
-      <div className="flex flex-col sm:flex-row items-center gap-6 border-b border-zinc-800 pb-8">
-        <img
+ 
+    return imfo ? (
+    <div className="min-h-screen bg-zinc-950 px-4 py-12 text-white flex items-center justify-center">
+      <div className="w-full max-w-3xl rounded-3xl border border-zinc-800 bg-zinc-900/90 p-8 shadow-2xl backdrop-blur-sm sm:p-10">
+        
+        {/* Profile Header */}
+        <div className="flex flex-col items-center gap-6 border-b border-zinc-800 pb-8 sm:flex-row sm:items-start">
+          <img
             src={imfo.profilePicture}
-          alt="Profile"
-          className="w-28 h-28 rounded-full object-cover border-4 border-blue-500"
-        />
-        <div className="text-center sm:text-left">
-          <h1 className="text-3xl font-bold">{imfo.name || "Developer"}</h1>
-          <p className="text-zinc-400 mt-1">📍 {imfo.location}</p>
-         <div className="flex gap-3">
-           <p  className="px-4 py-2 bg-green-500/10 border border-green-500/30
-               text-green-400 cursor-pointer rounded-full text-sm" onClick={addJob}>👨‍💻 Add Job</p>
-              <p  className="px-4 py-2 bg-green-500/10 border border-green-500/30
-              text-green-400 cursor-pointer rounded-full text-sm" onClick={Yourjobs}>👜 Your jobs</p>
-         </div>
+            alt="Profile"
+            className="h-28 w-28 rounded-full border-4 border-blue-500/80 object-cover shadow-lg shadow-blue-500/10"
+          />
+
+          <div className="flex-1 text-center sm:text-left">
+            <h1 className="text-3xl font-bold tracking-tight text-white">
+              {imfo.name || "Developer"}
+            </h1>
+            <p className="mt-1 flex items-center justify-center text-sm text-zinc-400 sm:justify-start">
+              <span className="mr-1">📍</span> {imfo.location}
+            </p>
+
+            {/* Quick Action Badges */}
+            <div className="mt-4 flex flex-wrap justify-center gap-3 sm:justify-start">
+              <button
+                type="button"
+                onClick={addJob}
+                className="rounded-full border border-emerald-500/30 bg-emerald-500/10 px-4 py-1.5 text-xs font-semibold text-emerald-400 transition hover:bg-emerald-500/20 active:scale-95"
+              >
+                👨‍💻 Add Job
+              </button>
+
+              <button
+                type="button"
+                onClick={Yourjobs}
+                className="rounded-full border border-emerald-500/30 bg-emerald-500/10 px-4 py-1.5 text-xs font-semibold text-emerald-400 transition hover:bg-emerald-500/20 active:scale-95"
+              >
+                👜 Your jobs
+              </button>
+            </div>
+          </div>
+        </div>
+
+        {/* Bio Section */}
+        <div className="mt-8">
+          <h2 className="text-sm font-semibold uppercase tracking-wider text-zinc-400">
+            About Me
+          </h2>
+          <p className="mt-2 text-base leading-relaxed text-zinc-300">
+            {imfo.bio}
+          </p>
+        </div>
+
+        {/* Skills Section */}
+        <div className="mt-8">
+          <h2 className="text-sm font-semibold uppercase tracking-wider text-zinc-400">
+            Skills
+          </h2>
+          <div className="mt-3 flex flex-wrap gap-2.5">
+            {imfo.skills?.map((skill, index) => (
+              <span
+                key={index}
+                className="rounded-full border border-blue-500/30 bg-blue-500/10 px-3.5 py-1 text-xs font-medium text-blue-400"
+              >
+                {skill}
+              </span>
+            ))}
+          </div>
+        </div>
+
+        {/* Resume Section */}
+        <div className="mt-8 border-t border-zinc-800 pt-6">
+          <a
+            href={imfo.resume}
+            target="_blank"
+            rel="noreferrer"
+            className="inline-flex items-center gap-2 rounded-xl bg-blue-600 px-5 py-2.5 text-sm font-semibold text-white shadow-md shadow-blue-600/20 transition hover:bg-blue-500 active:scale-95"
+          >
+            📄 View Resume
+          </a>
         </div>
       </div>
-
-      <div className="mt-8">
-        <h2 className="text-xl font-semibold mb-3">About Me</h2>
-        <p className="text-zinc-400 leading-relaxed">{imfo.bio}</p>
-      </div>
-
-      <div className="mt-8">
-        <h2 className="text-xl font-semibold mb-4">Skills</h2>
-        <div className="flex flex-wrap gap-3">
-          {imfo.skills?.map((skill, index) => (
-            <span
-              key={index}
-              className="px-4 py-2 bg-blue-500/10 border border-blue-500/30
-                         text-blue-400 rounded-full text-sm"
-            >
-              {skill}
-            </span>
-          ))}
-        </div>
-      </div>
-
-      <div className="mt-8">
-        <a
-          href={imfo.resume}
-          target="_blank"
-          rel="noreferrer"
-          className="inline-flex items-center px-5 py-3 bg-blue-600
-                     hover:bg-blue-500 rounded-xl font-semibold transition"
-        >
-          📄 View Resume
-        </a>
-      </div>
-
     </div>
-  </div>
-):(
-    <div className="min-h-screen bg-zinc-950 flex items-center justify-center px-4 py-10">
+  ) : (
+    <div className="min-h-screen bg-zinc-950 px-4 py-12 flex items-center justify-center">
       <form
         onSubmit={handleSubmit}
-        className="w-full max-w-lg bg-zinc-900 border border-zinc-800 rounded-2xl p-8 shadow-2xl space-y-5"
+        className="w-full max-w-lg space-y-5 rounded-2xl border border-zinc-800 bg-zinc-900/90 p-8 shadow-2xl backdrop-blur-sm"
       >
-        <h1 className="text-3xl font-bold text-white text-center">
-          Create Your Profile
-        </h1>
-<textarea
-  required
-  placeholder="Write something about yourself..."
-  value={bio}
-  onChange={(e) => setBio(e.target.value)}
-  className="w-full min-h-32 rounded-xl bg-zinc-800 border border-zinc-700 
-             text-white placeholder-zinc-400 px-4 py-3 outline-none 
-             focus:border-blue-500 focus:ring-2 focus:ring-blue-500/20"
-/>
+        <div className="text-center">
+          <h1 className="text-2xl font-bold tracking-tight text-white sm:text-3xl">
+            Create Your Profile
+          </h1>
+          <p className="mt-1 text-sm text-zinc-400">
+            Set up your professional portfolio details
+          </p>
+        </div>
 
-<input
-  required
-  type="text"
-  placeholder="Enter Your Name"
-  value={userName}
-  onChange={(e) => setuserName(e.target.value)}
-  className="w-full rounded-xl bg-zinc-800 border border-zinc-700 
-             text-white placeholder-zinc-400 px-4 py-3 outline-none 
-             focus:border-blue-500 focus:ring-2 focus:ring-blue-500/20"
-/>
+        <div>
+          <label className="mb-2 block text-xs font-medium uppercase tracking-wider text-zinc-400">
+            Bio
+          </label>
+          <textarea
+            required
+            placeholder="Write something about yourself..."
+            value={bio}
+            onChange={(e) => setBio(e.target.value)}
+            className="min-h-28 w-full rounded-xl border border-zinc-700 bg-zinc-800/80 px-4 py-3 text-sm text-white placeholder-zinc-500 outline-none transition focus:border-blue-500 focus:ring-2 focus:ring-blue-500/20"
+          />
+        </div>
 
-<input
-  required
-  type="text"
-  placeholder="Skills (e.g. React, Node.js, MongoDB)"
-  value={skills}
-  onChange={(e) => setSkills(e.target.value)}
-  className="w-full rounded-xl bg-zinc-800 border border-zinc-700 
-             text-white placeholder-zinc-400 px-4 py-3 outline-none 
-             focus:border-blue-500 focus:ring-2 focus:ring-blue-500/20"
-/>
+        <div>
+          <label className="mb-2 block text-xs font-medium uppercase tracking-wider text-zinc-400">
+            Full Name
+          </label>
+          <input
+            required
+            type="text"
+            placeholder="Enter Your Name"
+            value={userName}
+            onChange={(e) => setuserName(e.target.value)}
+            className="w-full rounded-xl border border-zinc-700 bg-zinc-800/80 px-4 py-2.5 text-sm text-white placeholder-zinc-500 outline-none transition focus:border-blue-500 focus:ring-2 focus:ring-blue-500/20"
+          />
+        </div>
 
-<input
-  required
-  type="text"
-  placeholder="Location"
-  value={location}
-  onChange={(e) => setLocation(e.target.value)}
-  className="w-full rounded-xl bg-zinc-800 border border-zinc-700 
-             text-white placeholder-zinc-400 px-4 py-3 outline-none 
-             focus:border-blue-500 focus:ring-2 focus:ring-blue-500/20"
-/>
+        <div>
+          <label className="mb-2 block text-xs font-medium uppercase tracking-wider text-zinc-400">
+            Skills
+          </label>
+          <input
+            required
+            type="text"
+            placeholder="Skills (e.g. React, Node.js, MongoDB)"
+            value={skills}
+            onChange={(e) => setSkills(e.target.value)}
+            className="w-full rounded-xl border border-zinc-700 bg-zinc-800/80 px-4 py-2.5 text-sm text-white placeholder-zinc-500 outline-none transition focus:border-blue-500 focus:ring-2 focus:ring-blue-500/20"
+          />
+        </div>
 
-<div>
-  <label className="block text-sm font-medium text-zinc-300 mb-2">
-    Profile Picture
-  </label>
+        <div>
+          <label className="mb-2 block text-xs font-medium uppercase tracking-wider text-zinc-400">
+            Location
+          </label>
+          <input
+            required
+            type="text"
+            placeholder="Location"
+            value={location}
+            onChange={(e) => setLocation(e.target.value)}
+            className="w-full rounded-xl border border-zinc-700 bg-zinc-800/80 px-4 py-2.5 text-sm text-white placeholder-zinc-500 outline-none transition focus:border-blue-500 focus:ring-2 focus:ring-blue-500/20"
+          />
+        </div>
 
-  <input
-    required
-    type="file"
-    accept="image/*"
-    onChange={(e) => setProfile(e.target.files[0])}
-    className="w-full rounded-xl bg-zinc-800 border border-zinc-700 
-               text-zinc-300 file:mr-4 file:py-2 file:px-4 
-               file:rounded-lg file:border-0 file:bg-blue-600 
-               file:text-white hover:file:bg-blue-500"
-  />
-</div>
+        <div>
+          <label className="mb-2 block text-xs font-medium uppercase tracking-wider text-zinc-400">
+            Profile Picture
+          </label>
+          <input
+            required
+            type="file"
+            accept="image/*"
+            onChange={(e) => setProfile(e.target.files[0])}
+            className="w-full rounded-xl border border-zinc-700 bg-zinc-800/80 p-2 text-sm text-zinc-400 file:mr-4 file:rounded-lg file:border-0 file:bg-blue-600 file:px-4 file:py-1.5 file:text-xs file:font-semibold file:text-white hover:file:bg-blue-500"
+          />
+        </div>
 
-<div>
-  <label className="block text-sm font-medium text-zinc-300 mb-2">
-    Resume
-  </label>
-
-  <input
-    required
-    type="file"
-    accept=".pdf,.doc,.docx"
-    onChange={(e) => setResume(e.target.files[0])}
-    className="w-full rounded-xl bg-zinc-800 border border-zinc-700 
-               text-zinc-300 file:mr-4 file:py-2 file:px-4 
-               file:rounded-lg file:border-0 file:bg-blue-600 
-               file:text-white hover:file:bg-blue-500"
-  />
-</div>
+        <div>
+          <label className="mb-2 block text-xs font-medium uppercase tracking-wider text-zinc-400">
+            Resume (PDF / DOC)
+          </label>
+          <input
+            required
+            type="file"
+            accept=".pdf,.doc,.docx"
+            onChange={(e) => setResume(e.target.files[0])}
+            className="w-full rounded-xl border border-zinc-700 bg-zinc-800/80 p-2 text-sm text-zinc-400 file:mr-4 file:rounded-lg file:border-0 file:bg-blue-600 file:px-4 file:py-1.5 file:text-xs file:font-semibold file:text-white hover:file:bg-blue-500"
+          />
+        </div>
 
         {message && (
-          <p className="text-center text-sm text-zinc-300">
+          <p className="rounded-lg border border-zinc-700 bg-zinc-800/50 py-2 text-center text-xs text-zinc-300">
             {message}
           </p>
         )}
@@ -235,13 +270,12 @@ setResume(null);
         <button
           type="submit"
           disabled={loading}
-          className="w-full bg-blue-600 hover:bg-blue-500 text-white font-semibold py-3 rounded-xl"
+          className="w-full rounded-xl bg-blue-600 py-3 text-sm font-semibold text-white shadow-lg shadow-blue-600/20 transition hover:bg-blue-500 disabled:cursor-not-allowed disabled:opacity-50 active:scale-[0.98]"
         >
           {loading ? "Creating Profile..." : "Create Profile"}
         </button>
       </form>
     </div>
-    )
   );
 };
 

@@ -31,7 +31,6 @@ router.get("/",async(req,res)=>{
      res.json("you are at home page");
 });
 
-/// i didn't handle this in a serperate fucntion but make sure before going to frontedn do it for clean architecture 
 router.get("/search",jobSearch);
 
 router.get("/jobs",auth,jobs);

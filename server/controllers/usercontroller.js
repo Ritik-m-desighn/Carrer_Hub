@@ -6,7 +6,9 @@ const profileModel=require("../models/profile");
 const bcrypt=require("bcrypt");
 const jwt=require("jsonwebtoken");
 const  mongoose  = require("mongoose");
-const secret="qwerty";
+require("dotenv").config();
+
+const secret=process.env.JWT_SECRET;
 
 const register=async(req,res,next)=>{
   try{
