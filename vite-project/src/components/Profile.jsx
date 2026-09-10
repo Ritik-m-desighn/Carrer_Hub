@@ -52,11 +52,13 @@ const handleSubmit = async (e) => {
   obj.append("name", userName);
 
   try {
+       const user = JSON.parse(localStorage.getItem("userImfo") || "{}");
+    const token = user?.token;
     setLoading(true);
     const data = await fetch("http://localhost:5000/profile", {
       method: "POST",
       headers: {
-        Authorization: `Bearer ${localStorage.getItem("token")}`
+        Authorization: `Bearer ${token}`
       },
       body: obj
     });
