@@ -402,6 +402,9 @@ const jobApplications = async (req, res, next) => {
 
 const getjob=async (req, res, next) => {
   try {
+    if (!mongoose.Types.ObjectId.isValid(req.params.id)) {
+  return res.status(400).json("Job ID is invalid");
+}
     const job = await jobModel
       .findById(req.params.id)
 
