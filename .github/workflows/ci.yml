@@ -16,13 +16,13 @@ jobs:
         run: npm ci
 
       - name: Install client dependencies
-        working-directory: ./client
+        working-directory: ./vite-project
         run: npm ci
 
       - name: Lint client
-        working-directory: ./client
+        working-directory: ./vite-project
         run: npm run lint
 
       - name: Build client
-        working-directory: ./client
+        working-directory: ./vite-project
         run: npm run build
