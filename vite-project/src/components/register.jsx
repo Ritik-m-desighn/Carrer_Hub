@@ -14,7 +14,7 @@ const Form = () => {
   const jobs = async () => {
       const user = JSON.parse(localStorage.getItem("userImfo") || "{}");
     const token = user?.token;
-    const data = await fetch("http://localhost:5000/jobs", {
+    const data = await fetch("https://carrer-hub-1-a4x4.onrender.com/jobs", {
       headers: {
         Authorization: `Bearer ${token}`,
       }
@@ -31,7 +31,7 @@ const Form = () => {
 
   const handleSubmit = async () => {
     try {
-      const res = await fetch("http://localhost:5000/register", {
+      const res = await fetch("https://carrer-hub-1-a4x4.onrender.com/register", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ email, password })

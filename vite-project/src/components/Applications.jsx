@@ -10,7 +10,7 @@ const Applications = () => {
   const applications = async () => {
         const user = JSON.parse(localStorage.getItem("userImfo") || "{}");
     const token = user?.token;
-    const data = await fetch("http://localhost:5000/applications/user",{
+    const data = await fetch("https://carrer-hub-1-a4x4.onrender.com/applications/user",{
         headers: { Authorization: `Bearer ${token}`}
     });
     const res = await data.json();
@@ -24,7 +24,7 @@ const Applications = () => {
      const user = JSON.parse(localStorage.getItem("userImfo") || "{}");
     const token = user?.token;
   const data = await fetch(
-    `http://localhost:5000/applications/delete/${i}`,
+    `https://carrer-hub-1-a4x4.onrender.com/applications/delete/${i}`,
     {
       method: "DELETE",
       headers: {

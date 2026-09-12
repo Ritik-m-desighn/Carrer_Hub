@@ -36,7 +36,7 @@ const EditJob = () => {
         const token = getToken();
 
         const response = await fetch(
-          `http://localhost:5000/applications/recruiter/getjob/${jobId}`,
+          `https://carrer-hub-1-a4x4.onrender.com/applications/recruiter/getjob/${jobId}`,
           {
             method: "GET",
             headers: {
@@ -100,7 +100,7 @@ const EditJob = () => {
       const token = getToken();
 
       const response = await fetch(
-        `http://localhost:5000/applications/recruiter/jobUpdate/${jobId}`,
+        `https://carrer-hub-1-a4x4.onrender.com/applications/recruiter/jobUpdate/${jobId}`,
         {
           method: "PUT",
 

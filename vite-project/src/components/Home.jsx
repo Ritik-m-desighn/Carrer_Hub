@@ -15,19 +15,20 @@ const Home = () => {
         navigate(`/filtered?skill=${search}`)
     }
     const logout=async()=>{
-        await localStorage.clear("token");
+         localStorage.clear("token");
         console.log("you are loggedd out ");
         navigate("/");
     }
     const jobs=async()=>{
       const user = JSON.parse(localStorage.getItem("userImfo") || "{}");
       const token = user?.token;
-        const data=await fetch("http://localhost:5000/jobs",{
+        const data=await fetch("https://carrer-hub-1-a4x4.onrender.com/jobs",{
         headers: { Authorization: `Bearer ${token}`}
         });
         const res=await data.json();
         if(data.ok){
         setJob(res);
+        
         }
         else{
             return;
@@ -100,7 +101,8 @@ const Home = () => {
   ) : (
     <div className="flex min-h-[60vh] items-center justify-center">
       <p className="rounded-xl border border-blue-500/20 bg-blue-500/10 px-6 py-3 font-medium text-blue-400">
-        You are not authorized
+Loading ......
+
       </p>
     </div>
   );

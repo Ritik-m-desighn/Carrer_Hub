@@ -35,7 +35,7 @@ const AddJob = () => {
     try {
             const user = JSON.parse(localStorage.getItem("userImfo") || "{}");
     const token = user?.token;
-      const response = await fetch("http://localhost:5000/addJobs", {
+      const response = await fetch("https://carrer-hub-1-a4x4.onrender.com/addJobs", {
         method: "POST",
         headers: {
             "Content-Type": "application/json",

@@ -21,7 +21,7 @@ const YourJobs = () => {
       const token = getToken();
 
       const res = await fetch(
-        "http://localhost:5000/applications/recruiter/jobs",
+        "https://carrer-hub-1-a4x4.onrender.com/applications/recruiter/jobs",
         {
           headers: {
             Authorization: `Bearer ${token}`,
@@ -60,7 +60,7 @@ fetchJobs();
     const token = getToken();
 
     const response = await fetch(
-      `http://localhost:5000/applications/recruiter/delete/${jobId}`,
+      `https://carrer-hub-1-a4x4.onrender.com/applications/recruiter/delete/${jobId}`,
       {
         method: "DELETE",
         headers: {
@@ -96,7 +96,7 @@ const handleUpdate = async (jobId) => {
 const handleApplications = async (jobId) => {
   try {
     const token = getToken();
-    const response = await fetch(`http://localhost:5000/recruiter/jobApplications/${jobId}`, {
+    const response = await fetch(`https://carrer-hub-1-a4x4.onrender.com/recruiter/jobApplications/${jobId}`, {
       headers: {
         Authorization: `Bearer ${token}`,
       },

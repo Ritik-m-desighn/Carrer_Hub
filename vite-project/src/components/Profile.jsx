@@ -16,13 +16,12 @@ const Profile = () => {
   const getProfile=async()=>{
     const user = JSON.parse(localStorage.getItem("userImfo") || "{}");
     const token = user?.token;
-    const data=await fetch("http://localhost:5000/getProfile",{
+    const data=await fetch("https://carrer-hub-1-a4x4.onrender.com/getProfile",{
       headers: {
         Authorization: `Bearer ${token}`
       },
     })
     const res=await data.json();
-    console.log(res.message)
     if(res.message!="Profile not found"){
         setImfo(res);
     }
@@ -55,16 +54,14 @@ const handleSubmit = async (e) => {
        const user = JSON.parse(localStorage.getItem("userImfo") || "{}");
     const token = user?.token;
     setLoading(true);
-    const data = await fetch("http://localhost:5000/profile", {
+    const data = await fetch("https://carrer-hub-1-a4x4.onrender.com/profile", {
       method: "POST",
       headers: {
         Authorization: `Bearer ${token}`
       },
       body: obj
     });
-
     const res = await data.json();
-
     if (data.ok) {
       setBio("");
 setSkills("");

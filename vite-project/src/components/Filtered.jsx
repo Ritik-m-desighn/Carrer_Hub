@@ -10,7 +10,7 @@ const Filtered = () => {
     const search = searchParams.get("skill");
   const [job,setJob]=useState([]);
   const jobs=async()=>{
-const data=await fetch(`http://localhost:5000/search/?skill=${search.trim()}`,{
+const data=await fetch(`https://carrer-hub-1-a4x4.onrender.com/search/?skill=${search.trim()}`,{
         headers: { Authorization: `Bearer ${localStorage.getItem("token")}`}
         });
         const res=await data.json();

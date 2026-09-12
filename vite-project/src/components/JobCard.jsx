@@ -6,7 +6,7 @@ const JobCard = ({ val }) => {
   const apply=async()=>{
             const user = JSON.parse(localStorage.getItem("userImfo") || "{}");
     const token = user?.token;
-     const applied=await fetch(`http://localhost:5000/apply/${val._id}`,{
+     const applied=await fetch(`https://carrer-hub-1-a4x4.onrender.com/apply/${val._id}`,{
       method: "POST",
       headers: {
         Authorization: `Bearer ${token}`

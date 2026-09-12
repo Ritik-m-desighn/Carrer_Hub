@@ -8,7 +8,7 @@ import { useNavigate ,Navigate } from 'react-router-dom'
   const [password,setPass]=useState("");
   const handleSubmit=async()=>{
     try{
-  const res=await fetch("http://localhost:5000/login",{
+  const res=await fetch("https://carrer-hub-1-a4x4.onrender.com/login",{
           method:"POST",
           headers:{"Content-Type":"application/json"},
           body:JSON.stringify({email,password})
@@ -18,7 +18,8 @@ import { useNavigate ,Navigate } from 'react-router-dom'
             console.log("something went wrong");
             return;
         }
-localStorage.setItem("userImfo", JSON.stringify(data));        console.log("succesfull login");
+localStorage.setItem("userImfo", JSON.stringify(data));  
+      console.log("succesfull login");
         navigate("/home")
     }
     catch(err){

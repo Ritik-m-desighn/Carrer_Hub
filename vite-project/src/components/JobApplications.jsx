@@ -10,7 +10,7 @@ const JobApplications = ({applications}) => {
     const token = userInfo?.token;
 
     const response = await fetch(
-      `http://localhost:5000/applications/recruiter/applicationUpdate/${id}`,
+      `https://carrer-hub-1-a4x4.onrender.com/applications/recruiter/applicationUpdate/${id}`,
       {
     method: "PUT",
         headers: {
