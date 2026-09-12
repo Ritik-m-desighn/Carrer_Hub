@@ -359,11 +359,11 @@ const getProfile = async (req, res, next) => {
       ...profileData,
 
       profilePicture: profile.profilePicture
-        ? `http://localhost:5000/uploads/${profile.profilePicture}`
+        ? `https://carrer-hub-1-a4x4.onrender.com/uploads/${profile.profilePicture}`
         : null,
 
       resume: profile.resume
-        ? `http://localhost:5000/uploads/${profile.resume}`
+        ? `https://carrer-hub-1-a4x4.onrender.com/uploads/${profile.resume}`
         : null
     });
 
