@@ -57,6 +57,12 @@ router.delete("/applications/recruiter/delete/:id",auth,jobAuth,jobDelete
 router.delete("/applications/delete/:id",auth,applicationDelete
 );
 
+router.get("/monitoring-test-error", (req, res) => {
+  return res.status(500).json({
+    message: "Controlled monitoring test error"
+  });
+});
+
 router.put("/applications/recruiter/jobUpdate/:id",auth,jobAuth,jobUpdate)
 
 router.post("/profile",auth,upload.fields([{name:"profile"},{name:"resume"}]),profile
