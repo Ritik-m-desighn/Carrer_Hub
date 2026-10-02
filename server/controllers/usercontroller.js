@@ -10,6 +10,93 @@ require("dotenv").config();
 
 const secret=process.env.JWT_SECRET;
 
+const aliases = {
+  // Frontend
+  react: "reactjs",
+  reactjs: "reactjs",
+  "react.js": "reactjs",
+  "react js": "reactjs",
+
+  angular: "angular",
+  angularjs: "angular",
+  "angular.js": "angular",
+
+  vue: "vuejs",
+  vuejs: "vuejs",
+  "vue.js": "vuejs",
+
+  // JavaScript / TypeScript
+  javascript: "javascript",
+  js: "javascript",
+  "java script": "javascript",
+
+  typescript: "typescript",
+  ts: "typescript",
+
+  // Backend
+  node: "nodejs",
+  nodejs: "nodejs",
+  "node.js": "nodejs",
+  "node js": "nodejs",
+
+  express: "expressjs",
+  expressjs: "expressjs",
+  "express.js": "expressjs",
+
+  // Databases
+  mongodb: "mongodb",
+  mongo: "mongodb",
+  "mongo db": "mongodb",
+
+  mysql: "mysql",
+  "my sql": "mysql",
+
+  postgresql: "postgresql",
+  postgres: "postgresql",
+  "postgre sql": "postgresql",
+
+  // Languages
+  python: "python",
+  py: "python",
+
+  java: "java",
+  "c++": "cpp",
+  cpp: "cpp",
+  "c plus plus": "cpp",
+
+  "c#": "csharp",
+  csharp: "csharp",
+  "c sharp": "csharp",
+
+  // CSS / HTML
+  html: "html",
+  html5: "html",
+
+  css: "css",
+  css3: "css",
+
+  bootstrap: "bootstrap",
+  tailwind: "tailwindcss",
+  tailwindcss: "tailwindcss",
+  "tailwind css": "tailwindcss",
+
+  // Cloud / DevOps
+  aws: "aws",
+  "amazon web services": "aws",
+
+  azure: "azure",
+  "microsoft azure": "azure",
+
+  docker: "docker",
+  kubernetes: "kubernetes",
+  k8s: "kubernetes",
+
+  // Version control
+  git: "git",
+  github: "github",
+  gitlab: "gitlab"
+};
+
 const register=async(req,res,next)=>{
   try{
     const salt=await bcrypt.genSalt();
@@ -25,10 +112,19 @@ await userModel.create({
   }
 }
 
+
+
 const jobSearch=async(req,res,next)=>{
+  
  try{
-const { skill } = req.query;
-      const jobs = await jobModel.find({ skills: skill });
+const skill = req.query.skill.toLowerCase().trim();
+
+const normalizedSkill = aliases[skill] || skill;
+
+const jobs = await jobModel.find({
+  skills: normalizedSkill
+});
+
       res.status(200).json(jobs);
  } 
  catch(err){
@@ -113,13 +209,16 @@ const addJob = async (req, res, next) => {
       applicationUrl,
       skills,
     } = req.body;
-
+  const storeSkills = skills.map(skill => {
+    const value = skill.toLowerCase().trim();
+    return aliases[value] || value;
+  });
     const job = await jobModel.create({
       jobName,
       salary,
       city,
       applicationUrl,
-      skills,
+      skills:storeSkills,
       postBy: req.user,
     });
 
