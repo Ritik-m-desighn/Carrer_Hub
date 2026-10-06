@@ -57,6 +57,11 @@ router.delete("/applications/recruiter/delete/:id",auth,jobAuth,jobDelete
 router.delete("/applications/delete/:id",auth,applicationDelete
 );
 
+router.get("/monitoring-test-crash", (req, res) => {
+  console.error("Crash test route failed: Database connection dropped");
+  throw new Error("MONITORING TEST: Something unexpected happened");
+});
+
 router.put("/applications/recruiter/jobUpdate/:id",auth,jobAuth,jobUpdate)
 
 router.post("/profile",auth,upload.fields([{name:"profile"},{name:"resume"}]),profile
