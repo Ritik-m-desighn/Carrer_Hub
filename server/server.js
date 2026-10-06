@@ -15,5 +15,5 @@ app.use(errorHandle);
 connect();
 
 app.listen(process.env.PORT,()=>{
-    console.log(`server is listening on ${process.env.PORT}`)
+    console.log(`server is listening  ${process.env.PORT}`)
 })
