@@ -26,3 +26,7 @@ jobs:
       - name: Build client
         working-directory: ./vite-project
         run: npm run build
+        
+      - name: Build server Docker image
+        working-directory: ./server
+        run: docker build -t careerhub-server .
